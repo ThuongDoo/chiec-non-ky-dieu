@@ -19,7 +19,7 @@ function Mode({ questions }) {
   const [isAlert, setIsAlert] = useState(false);
   const [pointGained, setPointGained] = useState(0);
   const [isOptionDisplay, setIsOptionDisplay] = useState(false);
-  const [myOption, setMyOption] = useState(1);
+  const [myOption, setMyOption] = useState(0);
 
   useEffect(() => {
     const newAnswers = splitAnswer(questions[0].answer).map((item) => {
