@@ -11,10 +11,12 @@ import Typing from "../components/Typing";
 import config from "../resources/config.json";
 import wheelSegment from "../resources/wheelSegment.json";
 import Player from "./Player";
+import GameOver from "./GameOver";
 
 function Mode({ questions }) {
   const [answers, setAnswer] = useState([]);
   const [keyboard, setKeyboard] = useState([]);
+  const [hearts, setHearts] = useState(3);
 
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -22,8 +24,10 @@ function Mode({ questions }) {
   const [isSpinDisplay, setIsSpinDisplay] = useState(false);
   const [prizePoint, setPrizePoint] = useState(0);
   const [isOptionDisplay, setIsOptionDisplay] = useState(false);
-  const [myOption, setMyOption] = useState(0);
   const [point, setPoint] = useState(0);
+  const [isKeyboardDisplay, setIsKeyboardDisplay] = useState(false);
+  const [isTypingDisplay, setIsTypingDisplay] = useState(false);
+  const [isLose, setIsLose] = useState(false);
 
   useEffect(() => {
     const newAnswers = splitAnswer(questions[0].answer).map((item) => {
@@ -49,17 +53,14 @@ function Mode({ questions }) {
     });
     setKeyboard(newKeyboard);
 
-    const timer = setTimeout(() => {
-      setIsSpinDisplay(true);
-    }, config.spinDisplayDelay);
-
-    // Cleanup timer nếu cần
-    return () => clearTimeout(timer);
+    setIsOptionDisplay(true);
   }, [questions, keyboardJson]);
 
   useEffect(() => {
-    setIsSpinDisplay(false);
-  }, [answers]);
+    if (hearts <= 0) {
+      setIsLose(true);
+    }
+  }, [hearts]);
 
   const handleSpinClick = () => {
     if (!mustSpin) {
@@ -72,12 +73,11 @@ function Mode({ questions }) {
   const handleStopSpin = () => {
     setMustSpin(false); // Đặt mustSpin về false
     setIsAlert(true); // Đặt isAlert về true
-    setIsOptionDisplay(true);
     setPrizePoint(wheelSegment[prizeNumber].option);
-    // Sử dụng setTimeout để sau 3 giây đặt lại isAlert về false
     const timer = setTimeout(() => {
       setIsAlert(false);
       setIsSpinDisplay(false);
+      setIsKeyboardDisplay(true);
     }, config.spinDisplayDelay);
 
     // Cleanup timer nếu cần
@@ -86,7 +86,16 @@ function Mode({ questions }) {
 
   const handleOptionChange = (option) => {
     setIsOptionDisplay(false);
-    setMyOption(option);
+
+    if (option === 1) {
+      const timer = setTimeout(() => {
+        setIsSpinDisplay(true);
+      }, config.spinDisplayDelay);
+
+      return () => clearTimeout(timer);
+    } else if (option === 2) {
+      setIsTypingDisplay(true);
+    }
   };
 
   const handleKeyBoardChange = (key) => {
@@ -96,26 +105,23 @@ function Mode({ questions }) {
     setKeyboard(updatedKeyboard);
     checkAnswer(key);
 
-    setMyOption(0);
+    setIsKeyboardDisplay(false);
+
     const timer = setTimeout(() => {
-      setIsSpinDisplay(true);
-    }, config.spinDisplayDelay);
+      setIsOptionDisplay(true);
+    }, config.optionDisplayDelay);
     return () => clearTimeout(timer);
   };
 
   const handleTyping = (typingValue) => {
-    setMyOption(0);
+    setIsTypingDisplay(false);
     if (typingValue.toLowerCase() === questions[0].answer.toLowerCase()) {
       OpenAllLetter();
       const newPoint = point + 2000;
       setPoint(newPoint);
     } else {
-      console.log("hu");
+      setHearts(0);
     }
-    const timer = setTimeout(() => {
-      setIsSpinDisplay(true);
-    }, config.spinDisplayDelay);
-    return () => clearTimeout(timer);
   };
 
   const checkAnswer = (key) => {
@@ -128,6 +134,10 @@ function Mode({ questions }) {
         return { ...answer };
       }
     });
+    if (newPoint === point) {
+      const newHeart = hearts - 1;
+      setHearts(newHeart);
+    }
     setPoint(newPoint);
 
     setAnswer(updateAnswers);
@@ -158,7 +168,7 @@ function Mode({ questions }) {
         </div>
       </div>
       <div className=" absolute right-0 top-0">
-        <Player point={point} />
+        <Player point={point} heart={hearts} />
       </div>
       {isSpinDisplay === true && (
         <div className="w-full h-full absolute top-0 right-0">
@@ -187,16 +197,21 @@ function Mode({ questions }) {
         <div className="h-full w-full z-50 absolute">
           <Option onChange={handleOptionChange} />
         </div>
-      ) : myOption === 1 ? (
+      ) : isKeyboardDisplay === true ? (
         <div className="h-full w-full z-50 absolute">
           <Keyboard data={keyboard} onChange={handleKeyBoardChange} />
         </div>
       ) : (
-        myOption === 2 && (
+        isTypingDisplay === true && (
           <div className="h-full w-full z-50 absolute">
             <Typing onSubmit={handleTyping} />
           </div>
         )
+      )}
+      {isLose && (
+        <div className=" z-50 w-full h-full absolute">
+          <GameOver />
+        </div>
       )}
     </div>
   );
