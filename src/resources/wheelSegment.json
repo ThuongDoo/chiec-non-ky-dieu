@@ -1,0 +1,42 @@
+[
+  {
+    "option": 100,
+    "style": { "backgroundColor": "green", "textColor": "white" }
+  },
+  {
+    "option": 200,
+    "style": { "backgroundColor": "red", "textColor": "white" }
+  },
+  {
+    "option": 300,
+    "style": { "backgroundColor": "green", "textColor": "white" }
+  },
+  {
+    "option": 400,
+    "style": { "backgroundColor": "red", "textColor": "white" }
+  },
+  {
+    "option": 500,
+    "style": { "backgroundColor": "green", "textColor": "white" }
+  },
+  {
+    "option": 500,
+    "style": { "backgroundColor": "red", "textColor": "white" }
+  },
+  {
+    "option": 600,
+    "style": { "backgroundColor": "green", "textColor": "white" }
+  },
+  {
+    "option": 700,
+    "style": { "backgroundColor": "red", "textColor": "white" }
+  },
+  {
+    "option": 800,
+    "style": { "backgroundColor": "green", "textColor": "white" }
+  },
+  {
+    "option": 900,
+    "style": { "backgroundColor": "red", "textColor": "white" }
+  }
+]
