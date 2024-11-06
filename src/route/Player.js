@@ -4,7 +4,7 @@ import heartPng from "../resources/heart.png";
 function Player({ name = "Player 1", point = 0, color = "blue", heart = 3 }) {
   return (
     <div
-      className=" text-white px-4 py-8 flex flex-col gap-y-5 items-center justify-center"
+      className=" text-white px-4 py-2 flex flex-col gap-y-2 items-center justify-center"
       style={{ backgroundColor: color }}
     >
       <h1 className=" font-bold text-3xl">{name}</h1>

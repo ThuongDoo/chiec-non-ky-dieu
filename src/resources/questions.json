@@ -1,1 +1,11 @@
-[{ "ques": "day la cau hoi?", "answer": "CON CHO" }]
+[
+  { "ques": "day la cau hoi con cho?", "answer": "CON CHO" },
+  { "ques": "day la cau hoi con meo?", "answer": "CON MEO" },
+  { "ques": "day la cau hoi con bo?", "answer": "CON BO" },
+  { "ques": "day la cau hoi con trau?", "answer": "CON TRAU" },
+  { "ques": "day la cau hoi con khi?", "answer": "CON KHI" },
+  { "ques": "day la cau hoi con ca?", "answer": "CON CA" },
+  { "ques": "day la cau hoi con rong?", "answer": "CON RONG" },
+  { "ques": "day la cau hoi con te giac?", "answer": "CON TE GIAC" },
+  { "ques": "day la cau hoi con ca ngua?", "answer": "CON CA NGUA" }
+]

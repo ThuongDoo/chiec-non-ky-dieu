@@ -5,24 +5,17 @@ function MainMenu({ routes, onNavigate }) {
     <div className=" flex flex-col">
       <h1
         onClick={() => {
-          onNavigate(routes.mode.single);
-        }}
-      >
-        1 player
-      </h1>
-      <h1
-        onClick={() => {
-          onNavigate(routes.mode.multi);
-        }}
-      >
-        multiplay
-      </h1>
-      <h1
-        onClick={() => {
-          onNavigate(routes.guide);
+          onNavigate({ route: routes.guide });
         }}
       >
         Huong dan
+      </h1>
+      <h1
+        onClick={() => {
+          onNavigate({ route: routes.select });
+        }}
+      >
+        Play
       </h1>
     </div>
   );

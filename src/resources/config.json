@@ -1,4 +1,5 @@
 {
   "spinDisplayDelay": 500,
-  "optionDisplayDelay": 500
+  "optionDisplayDelay": 500,
+  "correctDisplayDelay": 1000
 }
