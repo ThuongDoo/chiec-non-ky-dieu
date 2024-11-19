@@ -2,8 +2,8 @@
   "spinDisplayDelay": 500,
   "optionDisplayDelay": 500,
   "correctDisplayDelay": 1000,
-  "optionTimeLimit": 1,
-  "keyboardTimeLimit": 1,
-  "typingTimeLimit": 1,
+  "optionTimeLimit": 10,
+  "keyboardTimeLimit": 30,
+  "typingTimeLimit": 60,
   "typingPoint": 2000
 }
