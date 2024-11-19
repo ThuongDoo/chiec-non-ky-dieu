@@ -3,11 +3,10 @@ import "./App.css";
 import MainMenu from "./route/MainMenu";
 import { useState } from "react";
 import Game from "./route/Game";
-import Mode from "./route/Mode";
-import SingleMode from "./route/SingleMode";
-import MultiMode from "./route/MultiMode";
 import PlayerSelector from "./route/PlayerSelector";
 import questionsList from "../src/resources/questions.json";
+import ScoreBoard from "./route/ScoreBoard";
+import Guide from "./route/Guide";
 
 function App() {
   const routes = {
@@ -15,6 +14,7 @@ function App() {
     game: "game",
     guide: "guide",
     select: "select",
+    scoreBoard: "score-board",
   };
   const [activeScreen, setActiveScreen] = useState(routes.mainMenu);
   const [playerColors, setPlayerColors] = useState([]);
@@ -36,10 +36,20 @@ function App() {
         <MainMenu routes={routes} onNavigate={hangleChangeRoute} />
       ) : activeScreen === routes.game ? (
         <Game
+          routes={routes}
           playerColors={playerColors}
           playerNames={playerNames}
           questions={questions}
+          onNavigate={hangleChangeRoute}
         />
+      ) : activeScreen === routes.scoreBoard ? (
+        <ScoreBoard
+          activeScreen={activeScreen}
+          routes={routes}
+          onNavigate={hangleChangeRoute}
+        />
+      ) : activeScreen === routes.guide ? (
+        <Guide routes={routes} onNavigate={hangleChangeRoute} />
       ) : (
         activeScreen === routes.select && (
           <PlayerSelector routes={routes} onNavigate={handlePlayerSelector} />

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, Component } from "react";
 import LetterTile from "../components/LetterTile";
 import keyboardJson from "../resources/keyboard.json";
+import clockImg from "../resources/clock.png";
+import bgImg from "../resources/bgGame.png";
 
 import scoreSegment from "../resources/scoreSegment.json";
 import { Wheel } from "react-custom-roulette";
@@ -13,13 +15,14 @@ import wheelSegment from "../resources/wheelSegment.json";
 import Player from "./Player";
 import GameOver from "./GameOver";
 
-function Game({ playerColors, playerNames, questions }) {
+function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
   const [activePlayer, setActivePlayer] = useState(0);
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [answers, setAnswer] = useState([]);
   const [keyboard, setKeyboard] = useState([]);
   const [hearts, setHearts] = useState([]);
   const [points, setPoints] = useState([]);
+  const [timeLimit, setTimeLimit] = useState(60);
 
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
@@ -33,10 +36,41 @@ function Game({ playerColors, playerNames, questions }) {
   const [isNext, setIsNext] = useState(false);
 
   useEffect(() => {
-    console.log(playerNames.length);
     setPoints(Array(playerNames.length).fill(0));
     setHearts(Array(playerNames.length).fill(3));
   }, [playerNames]);
+
+  useEffect(() => {
+    if (isLose === true) {
+      setTimeLimit(0);
+    } else if (timeLimit > 0) {
+      if (isSpinDisplay === false) {
+        const timer = setTimeout(() => {
+          setTimeLimit(timeLimit - 1);
+        }, 1000);
+        return () => clearTimeout(timer); // Xoá timer khi component bị unmount hoặc cập nhật
+      }
+    } else if (isLose === false) {
+      let newHeart = hearts;
+      newHeart[activePlayer] -= 1;
+      setHearts(newHeart);
+      setTimeLimit(config.optionTimeLimit);
+      changePlayer();
+      setIsOptionDisplay(true);
+      setIsKeyboardDisplay(false);
+      setIsTypingDisplay(false);
+    }
+  }, [timeLimit, isLose]);
+
+  useEffect(() => {
+    if (isOptionDisplay === true) {
+      setTimeLimit(config.optionTimeLimit);
+    } else if (isTypingDisplay) {
+      setTimeLimit(config.typingTimeLimit);
+    } else if (isKeyboardDisplay === true) {
+      setTimeLimit(config.keyboardTimeLimit);
+    }
+  }, [isOptionDisplay, isKeyboardDisplay, isTypingDisplay]);
 
   useEffect(() => {
     if (isNext === true) {
@@ -173,7 +207,7 @@ function Game({ playerColors, playerNames, questions }) {
       questions[activeQuestion].answer.toLowerCase()
     ) {
       let newPoint = points;
-      newPoint[activePlayer] += 2000;
+      newPoint[activePlayer] += config.typingPoint;
       setPoints(newPoint);
       setIsNext(true);
     } else {
@@ -233,7 +267,7 @@ function Game({ playerColors, playerNames, questions }) {
 
   return (
     <div className=" flex flex-col justify-center items-center h-screen">
-      <div className=" h-2/3 space-y-20 ">
+      <div className=" h-2/3 space-y-20 z-10">
         <h1 className=" text-5xl font-bold">
           {questions[activeQuestion].ques}
         </h1>
@@ -248,6 +282,17 @@ function Game({ playerColors, playerNames, questions }) {
                 />
               )
           )}
+        </div>
+      </div>
+      <div className=" absolute  h-full w-full bg-blue-500">
+        <img src={bgImg} alt="" className=" h-full w-full"></img>
+      </div>
+      <div className="absolute left-0 top-0 ">
+        <div className="relative">
+          <h1 className="absolute inset-0 flex justify-center items-center text-3xl pt-2">
+            {timeLimit}
+          </h1>
+          <img src={clockImg} alt="" className="w-20 h-20" />
         </div>
       </div>
       <div className=" absolute right-0 top-0 flex flex-col  h-full justify-between items-end py-10">
@@ -305,7 +350,12 @@ function Game({ playerColors, playerNames, questions }) {
       )}
       {isLose && (
         <div className=" z-50 w-full h-full absolute">
-          <GameOver />
+          <GameOver
+            routes={routes}
+            playerNames={playerNames}
+            points={points}
+            onNavigate={onNavigate}
+          />
         </div>
       )}
     </div>

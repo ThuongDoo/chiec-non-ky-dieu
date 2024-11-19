@@ -1,0 +1,70 @@
+[
+  {
+    "title": "Chế độ chơi:",
+    "content": [
+      { "title": "Chơi đơn:", "content": "Chỉ có một người chơi duy nhất." },
+      {
+        "title": "Chơi Nhóm:",
+        "content": "Có nhiều người chơi, mỗi người chơi sẽ thay phiên nhau đoán chữ cái hoặc trả lời câu hỏi."
+      }
+    ]
+  },
+  {
+    "title": "Bắt đầu trò chơi:",
+    "content": [
+      {
+        "title": "",
+        "content": "Trò chơi sẽ bắt đầu với một câu hỏi. Câu hỏi sẽ có một câu trả lời ẩn, và người chơi cần phải tìm ra câu trả lời đó."
+      }
+    ]
+  },
+  {
+    "title": "Lựa chọn hành động:",
+    "content": [
+      {
+        "title": "Lựa chọn 1:",
+        "content": "Trả lời câu hỏi ngay để nhận 2000 điểm."
+      },
+      {
+        "title": "Lựa chọn 2:",
+        "content": "Người chơi sẽ đoán từng chữ cái trong câu trả lời."
+      }
+    ]
+  },
+  {
+    "title": "Vòng quay may mắn:",
+    "content": [
+      {
+        "title": "",
+        "content": "Nếu chọn đoán chữ cái, người chơi sẽ quay vòng quay để xác định số điểm họ sẽ nhận được cho mỗi chữ cái đúng. Điểm này có thể thay đổi tùy thuộc vào kết quả của vòng quay."
+      }
+    ]
+  },
+  {
+    "title": "Sử dụng trái tim:",
+    "content": [
+      { "title": "", "content": "Mỗi người chơi có 3 trái tim." },
+      {
+        "title": "Đoán chữ cái sai:",
+        "content": "Mất 1 trái tim."
+      },
+      {
+        "title": "Đoán toàn bộ từ sai:",
+        "content": "Mất hết 3 trái tim (tức là bạn sẽ bị loại nếu hết tim)."
+      },
+      {
+        "title": "Hết thời gian:",
+        "content": "Mất 1 trái tim."
+      }
+    ]
+  },
+  {
+    "title": "Số vòng chơi:",
+    "content": [
+      {
+        "title": "",
+        "content": "Trò chơi có 5 câu hỏi, tương ứng với 5 vòng chơi. Mỗi vòng sẽ có một câu hỏi và bạn sẽ phải quyết định lựa chọn của mình (trả lời hoặc đoán chữ cái)."
+      }
+    ]
+  }
+]
