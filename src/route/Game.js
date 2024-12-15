@@ -242,15 +242,19 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
 
   const checkAnswer = (key) => {
     let newPoint = points;
+    const oldPoint = points[activePlayer];
+
     const updateAnswers = answers.map((answer) => {
       if (answer.key === key) {
         newPoint[activePlayer] += prizePoint;
+
         return { ...answer, isSelect: true };
       } else {
         return { ...answer };
       }
     });
-    if (newPoint[activePlayer] === points[activePlayer]) {
+
+    if (newPoint[activePlayer] === oldPoint) {
       let newHeart = hearts;
       newHeart[activePlayer] -= 1;
       setHearts(newHeart);

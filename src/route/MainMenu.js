@@ -24,7 +24,14 @@ function MainMenu({ routes, onNavigate }) {
         >
           Hướng dẫn
         </h1>
-
+        <h1
+          className=" bg-yellow-600 border border-yellow-500 text-5xl px-16 hover:bg-yellow-400 py-5 cursor-pointer rounded-xl"
+          onClick={() => {
+            onNavigate({ route: routes.ques });
+          }}
+        >
+          Bảng câu hỏi
+        </h1>
         <h1
           className=" bg-yellow-600 border border-yellow-500 text-5xl px-16 hover:bg-yellow-400 py-5 cursor-pointer rounded-xl"
           onClick={() => {
