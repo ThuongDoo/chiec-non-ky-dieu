@@ -24,6 +24,8 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
   const [points, setPoints] = useState([]);
   const [timeLimit, setTimeLimit] = useState(60);
 
+  const [questionCount, setQuestionCount] = useState(5);
+
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [isAlert, setIsAlert] = useState(false);
@@ -38,7 +40,18 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
   useEffect(() => {
     setPoints(Array(playerNames.length).fill(0));
     setHearts(Array(playerNames.length).fill(3));
+    if (playerNames.length === 1) {
+      setQuestionCount(10);
+    }
   }, [playerNames]);
+
+  console.log(answers);
+
+  useEffect(() => {
+    if (activeQuestion + 1 >= questionCount) {
+      setIsLose(true);
+    }
+  }, [activeQuestion]);
 
   useEffect(() => {
     if (isLose === true) {
@@ -202,15 +215,27 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
 
   const handleTyping = (typingValue) => {
     setIsTypingDisplay(false);
+    console.log(
+      typingValue.toLowerCase(),
+      questions[activeQuestion].answer.toLowerCase()
+    );
+
     if (
       typingValue.toLowerCase() ===
       questions[activeQuestion].answer.toLowerCase()
     ) {
       let newPoint = points;
+      console.log("true");
+
       newPoint[activePlayer] += config.typingPoint;
       setPoints(newPoint);
       setIsNext(true);
     } else {
+      console.log(
+        typingValue.toLowerCase(),
+        questions[activeQuestion].answer.toLowerCase()
+      );
+
       let newHearts = hearts;
       newHearts[activePlayer] = 0;
       setHearts(newHearts);

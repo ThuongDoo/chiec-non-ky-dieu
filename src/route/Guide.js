@@ -10,7 +10,7 @@ function Guide({ routes, onNavigate }) {
         <img src={bgImg} alt="" className=" h-full w-full "></img>
       </div>
       <h1 className=" text-6xl font-bold pt-10">Hướng dẫn</h1>
-      <div className=" relative w-5/6 flex-1 overflow-y-auto bg-white bg-opacity-30">
+      <div className=" relative w-5/6 flex-1 overflow-y-auto bg-white bg-opacity-90">
         {guideData.map((itemi, indexi) => (
           <div key={indexi} className="text-start px-4 py-6">
             <h1 className="  font-bold italic text-4xl">

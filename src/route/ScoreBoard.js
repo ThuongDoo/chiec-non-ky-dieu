@@ -40,7 +40,7 @@ function ScoreBoard({ onNavigate, routes, activeScreen }) {
       <h1 className=" text-6xl font-bold pt-10">Bảng Điểm</h1>
       <div className=" px-20 flex h-96 w-full gap-x-10 ">
         <div className="h-full w-1/2 flex flex-col relative">
-          <div className=" absolute h-full w-full bg-white -z-10 opacity-30 rounded-lg"></div>
+          <div className=" absolute h-full w-full bg-white -z-10 opacity-90 rounded-lg"></div>
           <h1 className=" text-3xl font-semibold italic">Chơi đơn</h1>
           <div className="overflow-y-auto flex-1 px-10 py-2 font-semibold text-black">
             {singleData.map((data, index) => (
@@ -59,7 +59,7 @@ function ScoreBoard({ onNavigate, routes, activeScreen }) {
           </div>
         </div>
         <div className="h-full w-1/2 flex flex-col relative">
-          <div className=" absolute h-full w-full bg-white -z-10 opacity-30 rounded-lg"></div>
+          <div className=" absolute h-full w-full bg-white -z-10 opacity-90 rounded-lg"></div>
           <h1 className=" text-3xl font-semibold italic">Chơi nhóm</h1>
           <div className="overflow-y-auto flex-1 px-10 py-2 font-semibold text-black">
             {multiData.map((data, index) => (
