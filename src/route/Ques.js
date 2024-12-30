@@ -15,7 +15,6 @@ const Ques = ({ onNavigate, routes }) => {
       await api
         .get("ques")
         .then((res) => {
-          console.log(res.data);
           setQuestions(res.data.questions);
         })
         .catch((e) => {
@@ -72,13 +71,9 @@ const Ques = ({ onNavigate, routes }) => {
   };
 
   const handleSaveToBackend = async () => {
-    console.log(questions);
-
     await api
       .post("ques", { questions })
-      .then((res) => {
-        console.log(res.data);
-      })
+      .then((res) => {})
       .catch((e) => {
         console.log(e);
       });

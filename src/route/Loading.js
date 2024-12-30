@@ -15,7 +15,6 @@ function Loading() {
     };
     fetchData();
   }, []);
-  console.log(questions);
 
   return <div>Loading</div>;
 }

@@ -9,7 +9,6 @@ function ScoreBoard({ onNavigate, routes, activeScreen }) {
     const getScore = async () => {
       try {
         await api.get(`user/${true}`).then((res) => {
-          console.log(res.data.users);
           const newScores = res.data.users.sort((a, b) => b.score - a.score);
           setSingleData(newScores);
         });
@@ -20,7 +19,6 @@ function ScoreBoard({ onNavigate, routes, activeScreen }) {
     const getMultiScore = async () => {
       try {
         await api.get(`user/${false}`).then((res) => {
-          console.log(res.data.users);
           const newScores = res.data.users.sort((a, b) => b.score - a.score);
           setMultiData(newScores);
         });

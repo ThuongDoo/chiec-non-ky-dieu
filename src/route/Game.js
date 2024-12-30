@@ -45,8 +45,6 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
     }
   }, [playerNames]);
 
-  console.log(answers);
-
   useEffect(() => {
     if (activeQuestion + 1 >= questionCount) {
       setIsLose(true);
@@ -215,27 +213,17 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
 
   const handleTyping = (typingValue) => {
     setIsTypingDisplay(false);
-    console.log(
-      typingValue.toLowerCase(),
-      questions[activeQuestion].answer.toLowerCase()
-    );
 
     if (
       typingValue.toLowerCase() ===
       questions[activeQuestion].answer.toLowerCase()
     ) {
       let newPoint = points;
-      console.log("true");
 
       newPoint[activePlayer] += config.typingPoint;
       setPoints(newPoint);
       setIsNext(true);
     } else {
-      console.log(
-        typingValue.toLowerCase(),
-        questions[activeQuestion].answer.toLowerCase()
-      );
-
       let newHearts = hearts;
       newHearts[activePlayer] = 0;
       setHearts(newHearts);
@@ -295,22 +283,36 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
   };
 
   return (
-    <div className=" flex flex-col justify-center items-center h-screen">
-      <div className=" h-2/3 space-y-20 z-10">
-        <h1 className=" text-5xl font-bold">
+    <div className=" flex flex-col justify-center items-center h-screen w-screen">
+      <div className=" py-20 space-y-10 h-2/3 absolute top-0 z-10">
+        <h1 className=" text-5xl font-bold px-60">
           {questions[activeQuestion].ques}
         </h1>
-        <div className=" flex ">
-          {answers.map(
-            (answer, index) =>
-              answer.key !== " " && (
-                <LetterTile
-                  key={index}
-                  letter={answer.key}
-                  isSelect={answer.isSelect}
-                />
-              )
-          )}
+        <div className="flex flex-wrap gap-4 mx-60  justify-center">
+          {answers
+            .reduce(
+              (acc, char) => {
+                if (char.key === " ") {
+                  acc.push([]); // Tạo mảng mới cho từ tiếp theo
+                } else {
+                  acc[acc.length - 1]?.push(char); // Thêm ký tự vào từ hiện tại
+                }
+                return acc;
+              },
+              [[]]
+            )
+            .filter((word) => word.length > 0) // Loại bỏ các từ rỗng
+            .map((word, wordIndex) => (
+              <div key={wordIndex} className=" flex p-2">
+                {word.map((char, charIndex) => (
+                  <LetterTile
+                    key={charIndex}
+                    letter={char.key}
+                    isSelect={char.isSelect}
+                  />
+                ))}
+              </div>
+            ))}
         </div>
       </div>
       <div className=" absolute  h-full w-full bg-blue-500">
