@@ -5,6 +5,28 @@ import bgImg from "../resources/bg.png";
 function ScoreBoard({ onNavigate, routes, activeScreen }) {
   const [multiData, setMultiData] = useState([]);
   const [singleData, setSingleData] = useState([]);
+  const handleDelete = () => {
+    const deleteScore = async () => {
+      try {
+        await api.delete(`user`).then((res) => {
+          setSingleData([]);
+          setMultiData([]);
+        });
+      } catch (error) {
+        console.error("Error saving score: ", error);
+      }
+    };
+    const confirmed = window.confirm(
+      "Bạn có chắc chắn muốn thực hiện hành động này?"
+    );
+    if (confirmed) {
+      deleteScore();
+
+      alert("Xoá thành công");
+      // Thực hiện hành động tại đây
+    } else {
+    }
+  };
   useEffect(() => {
     const getScore = async () => {
       try {
@@ -78,13 +100,19 @@ function ScoreBoard({ onNavigate, routes, activeScreen }) {
       </div>
       <div className=" flex justify-between items-center pb-16 px-20">
         <button
-          className=" bg-yellow-600 text-black font-bold text-3xl px-44 py-4 rounded-xl"
+          className=" bg-yellow-600 text-black font-bold text-3xl px-32 py-4 rounded-xl"
           onClick={() => onNavigate({ route: routes.mainMenu })}
         >
           MENU
         </button>
         <button
-          className=" bg-yellow-600 text-black font-bold text-3xl px-44 py-4 rounded-xl"
+          className=" bg-yellow-600 text-black font-bold text-3xl px-32 py-4 rounded-xl"
+          onClick={() => handleDelete()}
+        >
+          DELETE
+        </button>
+        <button
+          className=" bg-yellow-600 text-black font-bold text-3xl px-32 py-4 rounded-xl"
           onClick={() => onNavigate({ route: routes.select })}
         >
           PLAY
