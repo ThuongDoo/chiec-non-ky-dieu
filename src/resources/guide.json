@@ -62,8 +62,12 @@
     "title": "Số vòng chơi:",
     "content": [
       {
-        "title": "",
-        "content": "Trò chơi có 5 câu hỏi, tương ứng với 5 vòng chơi. Mỗi vòng sẽ có một câu hỏi và bạn sẽ phải quyết định lựa chọn của mình (trả lời hoặc đoán chữ cái)."
+        "title": "1 người chơi",
+        "content": "có 10 câu hỏi."
+      },
+      {
+        "title": "4 người chơi",
+        "content": "Có 5 câu hỏi. Lượt chơi được chia đều cho từng người chơi."
       }
     ]
   }
