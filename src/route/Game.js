@@ -354,7 +354,7 @@ function Game({ playerColors, playerNames, questions, routes, onNavigate }) {
               className=" bg-black text-white px-8 py-2 rounded-xl z-50"
               onClick={handleSpinClick}
             >
-              SPIN
+              QUAY
             </button>
           </div>
           <div className=" absolute top-0 right-0 opacity-70 bg-black w-full h-full z-10"></div>

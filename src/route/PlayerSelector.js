@@ -116,7 +116,7 @@ function PlayerSelector({ routes, onNavigate }) {
           onClick={handlePlay}
           className="mt-6 w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all"
         >
-          Play
+          Chơi
         </button>
       </div>
     </div>
