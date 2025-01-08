@@ -10,10 +10,10 @@ function PlayerSelector({ routes, onNavigate }) {
     "#FFD700",
   ]);
   const [playerNames, setPlayerNames] = useState([
-    "Player 1",
-    "Player 2",
-    "Player 3",
-    "Player 4",
+    "Người chơi 1",
+    "Người chơi 2",
+    "Người chơi 3",
+    "Người chơi 4",
   ]);
   const colorInputRefs = useRef([]);
 
